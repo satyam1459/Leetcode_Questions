@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static void printArray(int[] ar) {
+        for (int i = 0; i < ar.length; i++)
+            System.out.print(ar[i] + " ");
+        System.out.println();
+    }
+
+    static void sortArrayBasedOnSquare(int[] ar) {
+        Integer[] arr = new Integer[ar.length];
+        for (int i = 0; i < ar.length; i++) {
+            arr[i] = ar[i];
+        }
+
+        Arrays.sort(arr,(a,b) -> {
+                return Math.abs(a * a) - Math.abs(b * b);
+            }
+        );
+
+        for (int i = 0; i < arr.length; i++) {
+            ar[i] = arr[i];
+        }
+
+        printArray(ar);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] ar = new int[n];
+        for (int i = 0; i < n; i++) {
+            ar[i] = sc.nextInt();
+        }
+
+        sortArrayBasedOnSquare(ar);
+    }
+}
