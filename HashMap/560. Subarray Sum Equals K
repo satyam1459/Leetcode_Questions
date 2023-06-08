@@ -1,0 +1,71 @@
+## Brute force Approach
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static int countSubarrayWithSum(int[] ar,int n , int k){
+        int count = 0;
+        for(int i = 0 ;i <n;i++){
+            int sum = 0;
+            for(int j = i ;j < n;j++){
+                sum+=ar[j];
+                if(sum % k == 0)    count++;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+       Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] ar = new int[n];
+        for(int i = 0; i< n; i++)   ar[i] = sc.nextInt();
+        int sum = sc.nextInt();
+       System.out.println(countSubarrayWithSum(ar,n,sum)); 
+        
+    }
+}
+
+
+## Using HashMap with Time complexity O(N)
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static int countSubarrayWithSum(int[] ar,int n , int k){
+        //basically stores frequency of remainder while sum
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        
+        hm.put(0,1);
+        int count = 0;
+        int sum = 0;
+        
+        for(int i = 0 ;i <n;i++){
+            sum += ar[i];
+            int rem = sum % k;
+            
+            if(rem < 0){
+                rem += k;
+            }
+            if(hm.containsKey(rem)){
+                count += hm.get(rem);
+                hm.put(rem,hm.get(rem)+1);
+            }else{
+                hm.put(rem,1);
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+       Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] ar = new int[n];
+        for(int i = 0; i< n; i++)   ar[i] = sc.nextInt();
+        int sum = sc.nextInt();
+       System.out.println(countSubarrayWithSum(ar,n,sum)); 
+        
+    }
+}
